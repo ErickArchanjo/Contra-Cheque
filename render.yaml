@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: portal-contracheques
+    runtime: node
+    plan: starter          # disco persistente exige plano pago
+    buildCommand: npm install --include=dev && npm run build
+    startCommand: npm start
+    disk:
+      name: dados
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: NODE_ENV
+        value: production
+      - key: DATA_DIR
+        value: /var/data
+      - key: ENC_KEY
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_SENHA
+        sync: false
